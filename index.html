@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MARVIS — Music Production Portfolio | Nguyen Hoang</title>
+  <meta name="description"
+    content="Official single-page music production portfolio for MARVIS (Nguyen Hoang) featuring uncompressed audio demos, interactive career path, and seamless GSAP FLIP animations.">
+  <meta name="keywords"
+    content="MARVIS, Nguyen Hoang, Music Producer, Sound Engineer, Beatmaker, Portfolio, Music Library">
+
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- GSAP & Plugins -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Flip.min.js"></script>
+</head>
+
+<body>
+
+  <!-- BACKGROUND AUDIO ELEMENT FOR INSTANT AUTOPLAY -->
+  <audio id="bgm-audio" src="assets/audio/BGM.wav" loop autoplay preload="auto" style="display:none;"></audio>
+
+  <!-- BGM MUTE/UNMUTE FLOATING TOGGLE BUTTON -->
+  <button class="bgm-toggle-btn" id="bgm-toggle-btn" aria-label="Toggle background music"
+    title="Mute/Unmute Background Music">
+    <svg class="bgm-icon-sound" id="bgm-icon-sound" viewBox="0 0 24 24" width="18" height="18">
+      <path
+        d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"
+        fill="#FFFFFF" />
+    </svg>
+    <svg class="bgm-icon-mute" id="bgm-icon-mute" viewBox="0 0 24 24" width="18" height="18" style="display: none;">
+      <path
+        d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"
+        fill="#FF4D4D" />
+    </svg>
+    <span class="bgm-btn-label" id="bgm-btn-label">BGM ON</span>
+  </button>
+
+  <!-- CUSTOM TRAILING CURSOR -->
+  <div id="custom-cursor" class="custom-cursor">
+    <div class="cursor-dot"></div>
+  </div>
+
+  <!-- MAIN SCROLL CONTAINER -->
+  <main id="app-container">
+
+    <!-- ================= SECTION 1: HERO / WELCOME ================= -->
+    <section id="section-hero" class="section hero-section">
+      <!-- Background Texture Image (FIRST COVER.png) -->
+      <img src="assets/images/FIRST COVER.png" alt="First Cover Background" class="section-bg-img hero-bg-img"
+        onerror="this.style.display='none'">
+      <div class="hero-bg-overlay"></div>
+
+      <!-- Grid Typography Layout -->
+      <div class="hero-text-grid">
+        <div class="grid-row row-1">
+          <span class="grid-word decode-text" data-text="hi">hi</span>
+          <span class="grid-word decode-text" data-text="my">my</span>
+          <span class="grid-word decode-text" data-text="name">name</span>
+          <span class="grid-word decode-text" data-text="is">is</span>
+          <span class="grid-word decode-text" data-text="nguyen">nguyen</span>
+          <span class="grid-word decode-text" data-text="hoang">hoang</span>
+        </div>
+        <div class="grid-row row-2">
+          <span class="grid-word decode-text" data-text="(or">(or</span>
+          <span class="grid-word decode-text" data-text="you">you</span>
+          <span class="grid-word decode-text" data-text="can">can</span>
+          <span class="grid-word decode-text" data-text="just">just</span>
+          <span class="grid-word decode-text" data-text="call">call</span>
+          <span class="grid-word decode-text highlight-brand" data-text="MARVIS)">MARVIS)</span>
+        </div>
+        <div class="grid-row row-3">
+          <span class="grid-word decode-text" data-text="and">and</span>
+          <span class="grid-word decode-text" data-text="welcome">welcome</span>
+          <span class="grid-word decode-text" data-text="to">to</span>
+          <span class="grid-word decode-text" data-text="my">my</span>
+          <span class="grid-word decode-text" data-text="music">music</span>
+          <span class="grid-word decode-text" data-text="library">library</span>
+        </div>
+      </div>
+
+      <!-- Bottom Scroll Indicator -->
+      <div class="scroll-indicator" id="hero-scroll-btn">
+        <p class="scramble-text" data-text="scroll down to see more">scroll down to see more</p>
+        <svg class="chevron-icon" viewBox="0 0 24 24" width="24" height="24">
+          <path d="M6 9l6 6 6-6" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 2: PROFILE ================= -->
+    <section id="section-profile" class="section profile-section reveal-on-scroll">
+      <!-- Background Image -->
+      <img src="assets/images/FIRST COVER.png" alt="Profile Background Texture" class="section-bg-img profile-bg-img"
+        onerror="this.style.display='none'">
+
+      <!-- Top Center Header Badge (Small White Logo) -->
+      <div class="profile-top-badge">
+        <img src="assets/images/LOGO.png" alt="MARVIS White Logo" class="badge-logo-img">
+        <span class="badge-text">Music Production Portfolio</span>
+      </div>
+
+      <div class="profile-content-wrap">
+        <!-- Left Side: Quote -->
+        <div class="profile-left">
+          <div class="quote-block">
+            <blockquote class="quote-body scramble-text"
+              data-text="“I can either spend my time designing the candle, or I can spend my time designing the room that it sits in.”">
+              “I can either spend my time designing the candle, or I can spend my time designing the room that it sits
+              in.”
+            </blockquote>
+            <cite class="quote-author scramble-text" data-text="- Virgil Abloh">- Virgil Abloh</cite>
+          </div>
+        </div>
+
+        <!-- Right Side: Artist Portrait (PFP.png) & Nav Arrow -->
+        <div class="profile-right">
+          <div class="portrait-frame">
+            <img src="assets/images/PFP.png" alt="Nguyen Hoang Portrait" id="profile-img" class="profile-portrait-img">
+            <div class="nav-indicator" id="nav-info-trigger" title="Interactive Navigation">&lt;&lt;&lt;</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sliding Full-Screen Gradient Bio Panel (Black -> Transparent Right-to-Left Reveal) -->
+      <div class="profile-info-panel" id="profile-info-panel">
+        <img src="assets/images/GRADIENT.png" alt="Gradient Overlay" class="panel-gradient-bg"
+          onerror="this.style.display='none'">
+        <button class="panel-close-btn" id="panel-close-btn" aria-label="Close profile info">&gt;&gt;</button>
+
+        <div class="panel-content-wrap">
+          <div class="bio-text-img-container" id="bio-text-img-wrap">
+            <img src="assets/images/BIO TEXT.png" alt="Bio Text Graphic" class="bio-text-img" id="bio-text-img"
+              onerror="document.getElementById('bio-text-fallback').style.display='block';">
+
+            <!-- Exact text matching user reference image input_file_0.png -->
+            <div class="bio-text-fallback" id="bio-text-fallback">
+              <div class="meta-rows">
+                <div class="meta-row"><span class="lbl">Name:</span><span class="val">Nguyen Hoang</span></div>
+                <div class="meta-row"><span class="lbl">Artist name:</span><span class="val">MARVIS</span></div>
+                <div class="meta-row"><span class="lbl">DOB:</span><span class="val">6/15/2006</span></div>
+                <div class="meta-row"><span class="lbl">YOE:</span><span class="val">6+ months of production</span>
+                </div>
+                <div class="meta-row"><span class="lbl">Currently working as:</span><span class="val">Creative at T&A
+                    Ogilvy</span></div>
+              </div>
+              <p class="bio-para">
+                I have a deep passion for music. Although I've never taken formal vocal lessons, I have a strong natural
+                ear for pitch, melody, and rhythm. I can easily do backing vocals, harmonize, and improvise with the
+                music. While I don't have professional production experience, official releases, or past artist
+                collaborations yet, music is much more than just a hobby to me—it's something I've truly committed
+                myself to for a long time, and I'm eager to pursue this journey. (really serious about that)
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Overlapping Giant PROFILE Title -->
+      <div class="profile-title-container">
+        <h1 class="huge-title" id="profile-title" data-scramble="PROFILE">PROFILE</h1>
+      </div>
+    </section>
+
+    <!-- ================= SECTIONS 3 & 4: PORTFOLIO LIBRARY & FLIP PLAYER ================= -->
+    <section id="section-portfolio" class="section portfolio-section reveal-on-scroll">
+      <!-- Background Image (HORSE COVER.png) -->
+      <img src="assets/images/HORSE COVER.png" alt="Horse Cover Artwork" id="horse-bg-img" class="horse-bg-img">
+
+      <!-- Portfolio Header (Text removed per user instruction) -->
+      <div class="portfolio-header" style="display: none;"></div>
+
+      <!-- Track Grid View (Section 3) -->
+      <div class="portfolio-grid-container" id="portfolio-grid-view">
+        <!-- Left Sidebar Logo (As shown in Still 3 reference frame) -->
+        <div class="grid-sidebar-logo">
+          <img src="assets/images/LOGO.png" alt="MARVIS Logo" class="sidebar-logo-img">
+        </div>
+        <div class="track-grid" id="track-grid">
+          <!-- 7 Track Cards (4 on top row, 3 on bottom row) with .mp3 audio files -->
+          <div class="track-card" data-track-id="1" data-title="Track 1" data-name="257" data-duration="03:45:12"
+            data-audio="assets/audio/257.mp3" data-cover="assets/images/257 COVER.png"
+            data-desc="I want to create something with a sexy vibe. The feeling of hearing a rejection call from a lover is painful, and I used that feeling for inspiration. I learned a lot, from drum patterns to the realization that for this style, I just need to build the right atmosphere without adding too many complex background sounds.">
+            <div class="card-inner" id="card-inner-1">
+              <img src="assets/images/257 COVER.png" alt="257 Cover" class="track-cover-img"
+                onerror="this.onerror=null; this.parentElement.classList.add('grey-gradient-cover'); this.style.display='none';">
+            </div>
+          </div>
+
+          <div class="track-card" data-track-id="2" data-title="Track 2" data-name="AWAKE" data-duration="04:12:08"
+            data-audio="assets/audio/AWAKE.mp3" data-cover="assets/images/AWAKE COVER.png"
+            data-desc="I created this music track to participate in the AWAKE Light Festival in Daklak. You can watch footage of my art project featuring this track at <a href='https://vimeo.com/1219914672?share=copy&fl=sv&fe=ci' target='_blank' rel='noopener noreferrer' class='desc-link' onclick='event.stopPropagation();'>(CLICKABLE LINK)</a>. AWAKE is a light festival that gathers prominent visual artists and musicians like Teddy Chilla, Larria, Tùng Monkey, and others.">
+            <div class="card-inner" id="card-inner-2">
+              <img src="assets/images/AWAKE COVER.png" alt="AWAKE Cover" class="track-cover-img"
+                onerror="this.onerror=null; this.parentElement.classList.add('grey-gradient-cover'); this.style.display='none';">
+            </div>
+          </div>
+
+          <div class="track-card" data-track-id="3" data-title="Track 3" data-name="TNT REMAKE" data-duration="02:58:45"
+            data-audio="assets/audio/TNT Remake.mp3" data-cover="assets/images/TNT COVER.png"
+            data-desc="I like this song from CORTIS's latest album, so I remade it, it's that simple. I learned how to slide 808s and control instrument sounds like guitars. This project made me realize that hit songs can have simple beat structures.">
+            <div class="card-inner" id="card-inner-3">
+              <img src="assets/images/TNT COVER.png" alt="TNT COVER" class="track-cover-img"
+                onerror="this.onerror=null; this.parentElement.classList.add('grey-gradient-cover'); this.style.display='none';">
+            </div>
+          </div>
+
+          <div class="track-card" data-track-id="4" data-title="Track 4" data-name="totchoanh but I remix the ending"
+            data-duration="03:20:90" data-audio="assets/audio/totchoanh ending remix.mp3"
+            data-cover="assets/images/totchoanh COVER.png"
+            data-desc="I accidentally heard this song while on the road. I felt the end was missing something and wanted to push the emotions more. So, I composed and wrote piano and string parts for this it (I just hummed and felt it). This song helped me realize I should balance sound levels before exporting.">
+            <div class="card-inner" id="card-inner-4">
+              <img src="assets/images/totchoanh COVER.png" alt="totchoanh COVER" class="track-cover-img"
+                onerror="this.onerror=null; this.parentElement.classList.add('grey-gradient-cover'); this.style.display='none';">
+            </div>
+          </div>
+
+          <div class="track-card" data-track-id="5" data-title="Track 5" data-name="MONSTER" data-duration="03:15:33"
+            data-audio="assets/audio/monster.mp3" data-cover="assets/images/monster COVER.png"
+            data-desc="I heard the latest track, MONSTER by Destroy Lonely, and wanted to make a similar type beat. This project helped me understand that sound selection is very important.">
+            <div class="card-inner" id="card-inner-5">
+              <img src="assets/images/monster COVER.png" alt="monster COVER" class="track-cover-img"
+                onerror="this.onerror=null; this.parentElement.classList.add('grey-gradient-cover'); this.style.display='none';">
+            </div>
+          </div>
+
+          <div class="track-card" data-track-id="6" data-title="Track 6" data-name="HYPERFOCUS" data-duration="04:05:60"
+            data-audio="assets/audio/hyperfocus.mp3" data-cover="assets/images/HYPERFOCUS COVER.png"
+            data-desc="This is the beat I put the most heart into. From beginning to end, I carefully controlled and arranged the sounds so that everything fits together. This beat was also very spontaneous because I didn't know what I wanted to add next, I just let the emotions flow.">
+            <div class="card-inner" id="card-inner-6">
+              <img src="assets/images/HYPERFOCUS COVER.png" alt="HYPERFOCUS COVER" class="track-cover-img"
+                onerror="this.onerror=null; this.parentElement.classList.add('grey-gradient-cover'); this.style.display='none';">
+            </div>
+          </div>
+
+          <div class="track-card" data-track-id="7" data-title="Track 7" data-name="PAYBACK" data-duration="03:30:00"
+            data-audio="assets/audio/PAYBACK.mp3" data-cover="assets/images/PAYBACK COVER.png"
+            data-desc="I want to create something for the winner. So I made this beat and using the brass for the first time. I was extremely thrilled!">
+            <div class="card-inner" id="card-inner-7">
+              <img src="assets/images/PAYBACK COVER.png" alt="PAYBACK COVER" class="track-cover-img"
+                onerror="this.onerror=null; this.parentElement.classList.add('grey-gradient-cover'); this.style.display='none';">
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Description Banner -->
+        <div class="portfolio-footer-banner">
+          <p class="banner-text scramble-text"
+            data-text="As I considered music is my passion, I have made these couple tracks in order to train my skills and gained experiences via producing and remake tracks. Through the process, I found a lot of useful techniques, tips and even improve my little knowledge about music theory. Currently, making music is my side hustle while I am allowing myself to work in other creative fields, which is commercial production in particularly. However, I always push myself to train and be better thanks to my deep passion in music and related music production.">
+            As I considered music is my passion, I have made these couple tracks in order to train my skills and gained
+            experiences via producing and remake tracks. Through the process, I found a lot of useful techniques, tips
+            and even improve my little knowledge about music theory. Currently, making music is my side hustle while I
+            am allowing myself to work in other creative fields, which is commercial production in particularly.
+            However, I always push myself to train and be better thanks to my deep passion in music and related music
+            production.
+          </p>
+        </div>
+      </div>
+
+      <!-- Morph Player View (Section 4 - Active Modal View with Single Cover Slot) -->
+      <div class="player-overlay" id="player-overlay-view">
+        <button class="player-back-btn" id="player-back-btn" aria-label="Back to track grid">
+          <svg viewBox="0 0 24 24" width="32" height="32">
+            <path d="M15 19l-7-7 7-7" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </button>
+
+        <div class="player-content-wrap">
+          <!-- Expanded Card Cover Target (Single morph slot) -->
+          <div class="player-cover-target" id="player-cover-target"></div>
+
+          <!-- Right Side Metadata & Controls -->
+          <div class="player-meta-block">
+            <p class="song-description" id="player-song-desc">
+              This is song description. This is song description. This is song description. This is song description.
+              This is song description. This is song description. This is song description. This is song description.
+              This is song description. This is song description.
+            </p>
+
+            <div class="player-track-info">
+              <span class="info-item track-number" id="player-track-num">Track 1</span>
+              <span class="info-item track-name" id="player-track-name">257</span>
+              <span class="info-item track-timestamp" id="player-track-time">00:00:00</span>
+            </div>
+
+            <!-- Timeline Scrubber Bar -->
+            <div class="player-timeline-container" id="timeline-container">
+              <div class="timeline-bg"></div>
+              <div class="timeline-progress" id="timeline-progress"></div>
+              <div class="timeline-scrubber" id="timeline-scrubber"></div>
+            </div>
+
+            <!-- Demo Player Small Volume Control Bar (Bottom Left Below Progress Bar - 75% smaller width) -->
+            <div class="player-volume-row">
+              <div class="volume-container" id="player-volume-container" title="Adjust track volume">
+                <svg viewBox="0 0 24 24" width="14" height="14" class="volume-speaker-icon">
+                  <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"
+                    fill="#FFFFFF" />
+                </svg>
+                <div class="volume-bar-wrap" id="volume-bar-wrap">
+                  <div class="volume-bg"></div>
+                  <div class="volume-progress" id="volume-progress" style="width: 100%;"></div>
+                  <div class="volume-scrubber" id="volume-scrubber" style="left: 100%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Play / Pause Control Button -->
+            <div class="player-controls-row">
+              <button class="play-pause-btn" id="play-pause-btn" aria-label="Play/Pause track">
+                <svg class="play-icon" id="svg-play-icon" viewBox="0 0 24 24" width="24" height="24">
+                  <path d="M8 5v14l11-7z" fill="#000000" />
+                </svg>
+                <svg class="pause-icon" id="svg-pause-icon" viewBox="0 0 24 24" width="24" height="24"
+                  style="display: none;">
+                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" fill="#000000" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 5: CAREER PATH ================= -->
+    <section id="section-career" class="section career-section reveal-on-scroll">
+      <!-- Background Image (CAREER PATH COVER.png) -->
+      <img src="assets/images/CAREER PATH COVER.png" alt="Career Path Cover Background"
+        class="section-bg-img career-bg-img" onerror="this.style.display='none'">
+
+      <!-- CAREER PATH Title (Fitted size) -->
+      <div class="career-title-container">
+        <h1 class="huge-title career-title" id="career-title" data-scramble="CAREER PATH">CAREER PATH</h1>
+      </div>
+
+      <!-- Single Graphic Big Circle Container (BIG CIRCLE.png - Clean graphic only) -->
+      <div class="big-circle-container" id="big-circle-wrap">
+        <img src="assets/images/BIG CIRCLE.png" alt="Career Path Circles Graphic" class="big-circle-img"
+          onerror="this.style.display='none'">
+      </div>
+
+      <!-- Bottom Right Social Links (Facebook & Instagram Stacked Vertically) -->
+      <div class="career-social-stack">
+        <a href="https://www.facebook.com/rosingate" target="_blank" rel="noopener noreferrer" class="social-icon-link"
+          title="Facebook - rosingate">
+          <img src="assets/images/FB ICON.webp" alt="Facebook Icon" class="social-icon-img"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <span class="social-icon-fallback fb-fallback">FB</span>
+        </a>
+        <a href="https://www.instagram.com/hi.nghoang/" target="_blank" rel="noopener noreferrer"
+          class="social-icon-link" title="Instagram - hi.nghoang">
+          <img src="assets/images/INSTA ICON.webp" alt="Instagram Icon" class="social-icon-img"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <span class="social-icon-fallback insta-fallback">IG</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- JavaScript Modules -->
+  <script src="js/scramble.js"></script>
+  <script src="js/audio-player.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
